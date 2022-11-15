@@ -1,13 +1,16 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import 'hammerjs';
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-if (environment.production) {
-  enableProdMode();
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const config = new DocumentBuilder()
+    .setTitle(process.env.COMPONENT_NAME)
+    .setDescription(process.env.COMPONENT_DESCRIPTION)
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+  await app.listen(3000);
 }
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+bootstrap();
