@@ -10,8 +10,8 @@ env:
   DOCKER_FILE_PATH: ./prod/Dockerfile.publish
   DOCKER_BUILD_CONTEXT: prod
   DOCKER_PUBLISH_CONTEXT: prod
-  CONTAINER_NAME: apipeline1
-  REPOSITORY_NAME: apipeline1
+  CONTAINER_NAME: sample
+  REPOSITORY_NAME: sample
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
